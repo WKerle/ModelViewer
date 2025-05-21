@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Model Switcher</title>
+  <title>Model Selector</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
     body {
@@ -29,7 +29,7 @@
     }
 
     #control-panel {
-      width: 150px;
+      width: 200px;
       background: #222;
       display: flex;
       justify-content: center;
@@ -37,8 +37,9 @@
       padding: 1rem;
     }
 
-    button {
-      padding: 0.5rem 1rem;
+    select {
+      width: 100%;
+      padding: 0.5rem;
       font-size: 1rem;
       background: #444;
       color: white;
@@ -47,7 +48,7 @@
       cursor: pointer;
     }
 
-    button:hover {
+    select:hover {
       background: #666;
     }
   </style>
@@ -67,16 +68,17 @@
     </model-viewer>
   </div>
   <div id="control-panel">
-    <button onclick="switchModel()">Next Model</button>
+    <select id="modelSelector" onchange="changeModel(this.value)">
+      <option value="MAXA.glb">Maxentius A</option>
+      <option value="MAXB.glb">Maxentius B</option>
+      <option value="MAXC.glb">Maxentius C</option>
+      <!--<option value="model.glb">Herme</option>      -->
+    </select>
   </div>
 
   <script>
-    const models = ["MAXA.glb", "model.glb"]; // Add as many as you want
-    let currentIndex = 0;
-
-    function switchModel() {
-      currentIndex = (currentIndex + 1) % models.length;
-      document.getElementById("modelViewer").src = models[currentIndex];
+    function changeModel(modelPath) {
+      document.getElementById("modelViewer").src = modelPath;
     }
   </script>
 </body>
